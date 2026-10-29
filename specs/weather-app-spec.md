@@ -21,11 +21,12 @@ O Weather App é uma aplicação web em pt-BR para consultar o clima atual e a p
 
 ## User Stories
 
-- **US-01 — Consulta rápida:** Como pessoa que toma decisões para o dia, quero buscar minha cidade e ver o clima atual para me preparar antes de sair. Persona: pessoa que toma decisões para o dia.
-- **US-02 — Planejamento semanal:** Como pessoa que planeja atividades da semana, quero consultar os próximos cinco dias para escolher quando realizar atividades ou viajar. Persona: pessoa que planeja atividades da semana.
-- **US-03 — Escolha da localidade:** Como usuário que encontra cidades com nomes iguais, quero distinguir os resultados por região ou país para selecionar o lugar correto. Persona: qualquer usuário que pesquisa uma cidade.
-- **US-04 — Preferência de temperatura:** Como usuário acostumado a uma unidade específica, quero alternar entre Celsius e Fahrenheit para interpretar a temperatura com facilidade. Persona: pessoa que toma decisões para o dia.
-- **US-05 — Recuperação de falha:** Como usuário, quero receber uma explicação quando a busca falhar e poder tentar novamente para continuar minha consulta. Persona: qualquer usuário.
+- **US-01 — Busca de cidade:** Como pessoa que toma decisões para o dia, quero buscar uma cidade pelo nome para consultar o clima da localidade desejada. **Requisito: RF-01.**
+- **US-02 — Seleção da localidade:** Como pessoa que planeja atividades da semana, quero distinguir resultados de cidades com o mesmo nome para consultar a previsão do destino correto. **Requisito: RF-02.**
+- **US-03 — Clima atual:** Como pessoa que toma decisões para o dia, quero ver as condições atuais da cidade selecionada para me preparar antes de sair. **Requisito: RF-03.**
+- **US-04 — Planejamento dos próximos dias:** Como pessoa que planeja atividades da semana, quero consultar a previsão de hoje e dos quatro dias seguintes para escolher quando realizar atividades ou viajar. **Requisito: RF-04.**
+- **US-05 — Unidade de temperatura:** Como pessoa que toma decisões para o dia, quero alternar entre Celsius e Fahrenheit para interpretar as temperaturas na unidade que prefiro. **Requisito: RF-05.**
+- **US-06 — Recuperação de consulta:** Como pessoa que planeja atividades da semana, quero receber uma mensagem clara quando uma consulta falhar e poder tentar novamente para continuar meu planejamento. **Requisito: RF-06.**
 
 ## Acceptance Criteria
 
