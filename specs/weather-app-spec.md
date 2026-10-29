@@ -32,37 +32,37 @@ O Weather App é uma aplicação web em pt-BR para consultar o clima atual e a p
 
 ### RF-01 — Buscar cidades
 
-- **Given** o campo de busca contém `Lisboa` e o serviço retorna duas localidades, **When** o usuário envia a busca, **Then** as duas localidades retornadas são exibidas como opções selecionáveis.
-- **Given** o campo de busca contém somente espaços, **When** o usuário envia a busca, **Then** nenhuma requisição de busca é enviada e a interface solicita um nome de cidade.
-- **Given** o serviço retorna uma lista vazia, **When** a busca termina, **Then** a interface informa que nenhuma cidade foi encontrada e mantém disponível o campo para uma nova busca.
+- **AC-RF01.1** — **Given** o campo de busca contém `Lisboa` e o serviço retorna duas localidades, **When** o usuário envia a busca, **Then** as duas localidades retornadas são exibidas como opções selecionáveis.
+- **AC-RF01.2** — **Given** o campo de busca contém somente espaços, **When** o usuário envia a busca, **Then** nenhuma requisição de busca é enviada e a interface solicita um nome de cidade.
+- **AC-RF01.3** — **Given** o serviço retorna uma lista vazia, **When** a busca termina, **Then** a interface informa que nenhuma cidade foi encontrada e mantém disponível o campo para uma nova busca.
 
 ### RF-02 — Selecionar cidade
 
-- **Given** a busca exibe as localidades `Springfield, Illinois` e `Springfield, Missouri`, **When** o usuário seleciona `Springfield, Missouri`, **Then** essa localidade aparece como selecionada e as consultas meteorológicas usam a localização retornada para essa opção.
-- **Given** um resultado contém região ou país nos dados retornados, **When** as opções de busca são exibidas, **Then** esses dados aparecem junto ao nome da cidade.
+- **AC-RF02.1** — **Given** a busca exibe as localidades `Springfield, Illinois` e `Springfield, Missouri`, **When** o usuário seleciona `Springfield, Missouri`, **Then** essa localidade aparece como selecionada e as consultas meteorológicas usam a localização retornada para essa opção.
+- **AC-RF02.2** — **Given** um resultado contém região ou país nos dados retornados, **When** as opções de busca são exibidas, **Then** esses dados aparecem junto ao nome da cidade.
 
 ### RF-03 — Consultar clima atual
 
-- **Given** uma cidade selecionada e uma resposta atual contendo temperatura `18.4 °C` e descrição `Parcialmente nublado`, **When** a consulta termina, **Then** a tela exibe `18.4 °C` e `Parcialmente nublado` para essa cidade.
-- **Given** a resposta não contém dados atuais, **When** a consulta termina, **Then** a tela informa que os dados atuais não estão disponíveis e não exibe uma temperatura substituta nem dados de outra cidade.
+- **AC-RF03.1** — **Given** uma cidade selecionada e uma resposta atual contendo temperatura `18.4 °C` e descrição `Parcialmente nublado`, **When** a consulta termina, **Then** a tela exibe `18.4 °C` e `Parcialmente nublado` para essa cidade.
+- **AC-RF03.2** — **Given** a resposta não contém dados atuais, **When** a consulta termina, **Then** a tela informa que os dados atuais não estão disponíveis e não exibe uma temperatura substituta nem dados de outra cidade.
 
 ### RF-04 — Consultar previsão de cinco dias
 
-- **Given** uma cidade selecionada e uma resposta diária com as datas `D`, `D+1`, `D+2`, `D+3` e `D+4`, **When** a consulta termina, **Then** as cinco datas são exibidas uma vez cada e em ordem cronológica, incluindo `D` como hoje.
-- **Given** a resposta contém dados para menos de cinco datas, **When** a previsão é exibida, **Then** somente as datas e os valores recebidos são mostrados e a ausência dos demais dias é indicada.
+- **AC-RF04.1** — **Given** uma cidade selecionada e uma resposta diária com as datas `D`, `D+1`, `D+2`, `D+3` e `D+4`, **When** a consulta termina, **Then** as cinco datas são exibidas uma vez cada e em ordem cronológica, incluindo `D` como hoje.
+- **AC-RF04.2** — **Given** a resposta contém dados para menos de cinco datas, **When** a previsão é exibida, **Then** somente as datas e os valores recebidos são mostrados e a ausência dos demais dias é indicada.
 
 ### RF-05 — Alternar unidade de temperatura
 
-- **Given** o clima atual e a previsão exibem temperaturas em Celsius, **When** o usuário seleciona Fahrenheit, **Then** todos os valores de temperatura atuais e previstos passam a usar o rótulo `°F`, e os valores `0 °C` e `100 °C` são exibidos como `32 °F` e `212 °F`.
-- **Given** o clima atual e a previsão exibem temperaturas em Fahrenheit, **When** o usuário seleciona Celsius, **Then** todos os valores de temperatura atuais e previstos passam a usar o rótulo `°C`, e os valores `32 °F` e `212 °F` são exibidos como `0 °C` e `100 °C`.
-- **Given** há uma cidade e cinco datas de previsão exibidas, **When** o usuário alterna a unidade, **Then** a cidade e as cinco datas permanecem iguais antes e depois da alternância.
+- **AC-RF05.1** — **Given** o clima atual e a previsão exibem temperaturas em Celsius, **When** o usuário seleciona Fahrenheit, **Then** todos os valores de temperatura atuais e previstos passam a usar o rótulo `°F`, e os valores `0 °C` e `100 °C` são exibidos como `32 °F` e `212 °F`.
+- **AC-RF05.2** — **Given** o clima atual e a previsão exibem temperaturas em Fahrenheit, **When** o usuário seleciona Celsius, **Then** todos os valores de temperatura atuais e previstos passam a usar o rótulo `°C`, e os valores `32 °F` e `212 °F` são exibidos como `0 °C` e `100 °C`.
+- **AC-RF05.3** — **Given** há uma cidade e cinco datas de previsão exibidas, **When** o usuário alterna a unidade, **Then** a cidade e as cinco datas permanecem iguais antes e depois da alternância.
 
 ### RF-06 — Comunicar estados de consulta
 
-- **Given** uma consulta foi enviada e a resposta ainda está pendente, **When** a interface aguarda a resposta, **Then** um indicador de carregamento é visível.
-- **Given** o serviço retorna uma falha ou timeout, **When** a consulta termina, **Then** a interface exibe uma mensagem de falha e um controle para tentar novamente.
-- **Given** a consulta de uma cidade nova falha após outra cidade ter sido exibida, **When** o estado de erro aparece, **Then** os dados da cidade anterior não são apresentados como dados da cidade nova.
-- **Given** uma consulta falhou e o controle de nova tentativa está visível, **When** o usuário o aciona, **Then** uma nova consulta é enviada para a cidade selecionada.
+- **AC-RF06.1** — **Given** uma consulta foi enviada e a resposta ainda está pendente, **When** a interface aguarda a resposta, **Then** um indicador de carregamento é visível.
+- **AC-RF06.2** — **Given** o serviço retorna uma falha ou timeout, **When** a consulta termina, **Then** a interface exibe uma mensagem de falha e um controle para tentar novamente.
+- **AC-RF06.3** — **Given** a consulta de uma cidade nova falha após outra cidade ter sido exibida, **When** o estado de erro aparece, **Then** os dados da cidade anterior não são apresentados como dados da cidade nova.
+- **AC-RF06.4** — **Given** uma consulta falhou e o controle de nova tentativa está visível, **When** o usuário o aciona, **Then** uma nova consulta é enviada para a cidade selecionada.
 
 ## Non-Functional Requirements
 
@@ -72,6 +72,17 @@ O Weather App é uma aplicação web em pt-BR para consultar o clima atual e a p
 - **RNF-04 — Acessibilidade (meta proposta):** buscar conformidade com WCAG 2.2 nível AA, incluindo navegação por teclado, nomes acessíveis para controles e suporte a leitores de tela. A meta requer aprovação.
 - **RNF-05 — Resiliência:** falhas, ausência de dados e demora do serviço externo devem resultar em estados compreensíveis, sem exibir valores inexistentes como válidos.
 - **RNF-06 — Privacidade e escopo de dados:** não exigir conta e não persistir dados de usuário em servidor. A persistência local de cidade ou unidade não está definida e não deve ser presumida.
+
+## Traceability Matrix
+
+| User Story | Requisito funcional | Acceptance Criteria | RNFs relevantes |
+| --- | --- | --- | --- |
+| US-01 — Busca de cidade | RF-01 | AC-RF01.1, AC-RF01.2, AC-RF01.3 | RNF-01, RNF-02, RNF-03, RNF-04 |
+| US-02 — Seleção da localidade | RF-02 | AC-RF02.1, AC-RF02.2 | RNF-01, RNF-02, RNF-03, RNF-04 |
+| US-03 — Clima atual | RF-03 | AC-RF03.1, AC-RF03.2 | RNF-01, RNF-02, RNF-03, RNF-04, RNF-05 |
+| US-04 — Planejamento dos próximos dias | RF-04 | AC-RF04.1, AC-RF04.2 | RNF-01, RNF-02, RNF-03, RNF-04, RNF-05 |
+| US-05 — Unidade de temperatura | RF-05 | AC-RF05.1, AC-RF05.2, AC-RF05.3 | RNF-01, RNF-02, RNF-04, RNF-06 |
+| US-06 — Recuperação de consulta | RF-06 | AC-RF06.1, AC-RF06.2, AC-RF06.3, AC-RF06.4 | RNF-01, RNF-02, RNF-04, RNF-05 |
 
 ## Edge Cases
 
