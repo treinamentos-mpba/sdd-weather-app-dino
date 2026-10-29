@@ -66,8 +66,16 @@ Os itens marcados como candidatos são necessidades razoáveis para validação;
 - O usuário poderá consultar dados sem criar uma conta; autenticação não foi mencionada.
 - Celsius e Fahrenheit são unidades de apresentação dos mesmos dados meteorológicos; o comportamento de persistência da escolha ainda precisa ser definido.
 - As personas preliminares representam necessidades plausíveis, mas não foram confirmadas por pesquisa com usuários.
-- Não se assume provedor, idioma, frequência de atualização, armazenamento de dados ou funcionamento offline com base apenas no briefing.
+- A frequência de atualização, o armazenamento no cliente e o funcionamento offline continuam sem definição.
 
-### Decisões de referência do treinamento
+## Decisões
 
-Para o exercício, o desafio do Module 02 propõe usar Open-Meteo sem chave de API, considerar “cinco dias” como hoje mais os quatro dias seguintes, usar Celsius como unidade padrão, não incluir autenticação nem persistência em servidor e disponibilizar a interface em pt-BR. Essas são decisões de referência do treinamento; devem ser confirmadas antes de tratá-las como requisitos aprovados do negócio.
+| Decisão | Justificativa | Pergunta em aberto resolvida |
+| --- | --- | --- |
+| Usar Open-Meteo como fonte de dados, sem chave de API. | Reduz a configuração necessária para o treinamento e evita provisionar uma chave para começar a integração; os limites e termos de uso do provedor ainda devem ser respeitados. | Qual fonte fornecerá clima e previsão? É necessária uma chave de API? |
+| Definir “cinco dias” como hoje mais os quatro dias seguintes. | Estabelece um intervalo único para produto, implementação e validação. | “Previsão de cinco dias” inclui hoje ou os cinco dias seguintes? |
+| Usar Celsius como unidade padrão. | Define uma apresentação inicial consistente com o idioma e o público principal definidos para o exercício, sem impedir a alternância para Fahrenheit. | Qual deve ser a unidade padrão? |
+| Não exigir autenticação nem manter persistência de dados no servidor. | Mantém o escopo do exercício focado em consulta meteorológica, sem contas ou dados de usuário armazenados no backend. | São necessárias contas ou persistência de dados no servidor? |
+| Disponibilizar a interface em pt-BR. | Define o idioma da interface e uma localidade inicial para textos e formatos regionais. | Em quais idiomas a interface deve estar disponível? |
+
+Essas decisões fecham as perguntas listadas acima no escopo do treinamento. Granularidade da previsão, frequência de atualização, persistência local e funcionamento offline continuam em aberto.
