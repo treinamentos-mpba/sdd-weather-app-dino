@@ -32,35 +32,37 @@ O Weather App é uma aplicação web em pt-BR para consultar o clima atual e a p
 
 ### RF-01 — Buscar cidades
 
-- **Dado** que o usuário informou um nome de cidade válido, **quando** enviar a busca, **então** o sistema apresenta os resultados de localidade retornados pelo serviço de busca.
-- **Dado** que o usuário enviou uma consulta sem resultados, **quando** a busca terminar, **então** o sistema informa que nenhuma cidade foi encontrada e permite iniciar outra busca.
+- **Given** o campo de busca contém `Lisboa` e o serviço retorna duas localidades, **When** o usuário envia a busca, **Then** as duas localidades retornadas são exibidas como opções selecionáveis.
+- **Given** o campo de busca contém somente espaços, **When** o usuário envia a busca, **Then** nenhuma requisição de busca é enviada e a interface solicita um nome de cidade.
+- **Given** o serviço retorna uma lista vazia, **When** a busca termina, **Then** a interface informa que nenhuma cidade foi encontrada e mantém disponível o campo para uma nova busca.
 
 ### RF-02 — Selecionar cidade
 
-- **Dado** que há resultados de busca, **quando** o usuário selecionar um resultado, **então** esse resultado passa a ser a cidade consultada e os dados exibidos correspondem a ela.
-- **Dado** que os resultados incluem localidades homônimas, **quando** forem apresentados, **então** cada opção inclui os dados de região ou país disponíveis para distingui-las. A regra exata de desambiguação é uma hipótese pendente.
+- **Given** a busca exibe as localidades `Springfield, Illinois` e `Springfield, Missouri`, **When** o usuário seleciona `Springfield, Missouri`, **Then** essa localidade aparece como selecionada e as consultas meteorológicas usam a localização retornada para essa opção.
+- **Given** um resultado contém região ou país nos dados retornados, **When** as opções de busca são exibidas, **Then** esses dados aparecem junto ao nome da cidade.
 
 ### RF-03 — Consultar clima atual
 
-- **Dado** que uma cidade foi selecionada e o serviço retornou dados atuais, **quando** a consulta terminar, **então** a tela exibe a temperatura e a descrição da condição meteorológica dessa cidade.
-- **Dado** que não há dados atuais disponíveis para a cidade, **quando** a consulta terminar, **então** a tela informa que os dados atuais não estão disponíveis e não inventa valores.
+- **Given** uma cidade selecionada e uma resposta atual contendo temperatura `18.4 °C` e descrição `Parcialmente nublado`, **When** a consulta termina, **Then** a tela exibe `18.4 °C` e `Parcialmente nublado` para essa cidade.
+- **Given** a resposta não contém dados atuais, **When** a consulta termina, **Then** a tela informa que os dados atuais não estão disponíveis e não exibe uma temperatura substituta nem dados de outra cidade.
 
 ### RF-04 — Consultar previsão de cinco dias
 
-- **Dado** que uma cidade foi selecionada e o serviço retornou previsão, **quando** a consulta terminar, **então** a tela apresenta cinco datas consecutivas, começando por hoje e incluindo os quatro dias seguintes.
-- **Dado** que há dados para menos de cinco datas, **quando** a previsão for apresentada, **então** os dias disponíveis são exibidos e a indisponibilidade dos demais é indicada; nenhuma data ou valor ausente é fabricado.
+- **Given** uma cidade selecionada e uma resposta diária com as datas `D`, `D+1`, `D+2`, `D+3` e `D+4`, **When** a consulta termina, **Then** as cinco datas são exibidas uma vez cada e em ordem cronológica, incluindo `D` como hoje.
+- **Given** a resposta contém dados para menos de cinco datas, **When** a previsão é exibida, **Then** somente as datas e os valores recebidos são mostrados e a ausência dos demais dias é indicada.
 
 ### RF-05 — Alternar unidade de temperatura
 
-- **Dado** que temperaturas estão visíveis em Celsius, **quando** o usuário selecionar Fahrenheit, **então** as temperaturas atuais e da previsão passam a ser exibidas em Fahrenheit, com o rótulo correto e valores equivalentes dentro do arredondamento apresentado.
-- **Dado** que temperaturas estão visíveis em Fahrenheit, **quando** o usuário selecionar Celsius, **então** as temperaturas atuais e da previsão passam a ser exibidas em Celsius, com o rótulo correto e valores equivalentes dentro do arredondamento apresentado.
-- **Dado** que a unidade foi alternada, **quando** a tela atualizar os valores, **então** a cidade selecionada e as datas da previsão permanecem inalteradas.
+- **Given** o clima atual e a previsão exibem temperaturas em Celsius, **When** o usuário seleciona Fahrenheit, **Then** todos os valores de temperatura atuais e previstos passam a usar o rótulo `°F`, e os valores `0 °C` e `100 °C` são exibidos como `32 °F` e `212 °F`.
+- **Given** o clima atual e a previsão exibem temperaturas em Fahrenheit, **When** o usuário seleciona Celsius, **Then** todos os valores de temperatura atuais e previstos passam a usar o rótulo `°C`, e os valores `32 °F` e `212 °F` são exibidos como `0 °C` e `100 °C`.
+- **Given** há uma cidade e cinco datas de previsão exibidas, **When** o usuário alterna a unidade, **Then** a cidade e as cinco datas permanecem iguais antes e depois da alternância.
 
 ### RF-06 — Comunicar estados de consulta
 
-- **Dado** que uma consulta está em andamento, **quando** os dados ainda não chegaram, **então** a interface indica que está carregando.
-- **Dado** que o serviço falhou ou excedeu o tempo de resposta, **quando** a consulta terminar sem sucesso, **então** a interface informa que não foi possível obter os dados e oferece uma nova tentativa.
-- **Dado** que uma nova cidade está sendo consultada, **quando** a consulta falhar, **então** os dados anteriores não são apresentados como se pertencessem à nova cidade.
+- **Given** uma consulta foi enviada e a resposta ainda está pendente, **When** a interface aguarda a resposta, **Then** um indicador de carregamento é visível.
+- **Given** o serviço retorna uma falha ou timeout, **When** a consulta termina, **Then** a interface exibe uma mensagem de falha e um controle para tentar novamente.
+- **Given** a consulta de uma cidade nova falha após outra cidade ter sido exibida, **When** o estado de erro aparece, **Then** os dados da cidade anterior não são apresentados como dados da cidade nova.
+- **Given** uma consulta falhou e o controle de nova tentativa está visível, **When** o usuário o aciona, **Then** uma nova consulta é enviada para a cidade selecionada.
 
 ## Non-Functional Requirements
 
